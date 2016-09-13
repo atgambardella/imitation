@@ -35,10 +35,16 @@ class RLGymSim(policyopt.Simulation):
     def done(self):
         return self.is_done
 
-    def draw(self, track_body_name='torso'):
+    def draw(self, track_body_name=None):
         self.env.render()
+        """
         if track_body_name is not None and track_body_name in self.env.model.body_names:
             self.env.viewer.cam.trackbodyid = self.env.model.body_names.index(track_body_name)
+        """
+    ###
+    def render(self):
+        self.env.render()
+    ###
 
     def __del__(self):
         if self.env.viewer:

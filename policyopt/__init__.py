@@ -1,7 +1,7 @@
 from collections import namedtuple
 from policyopt import util
 import numpy as np
-import multiprocessing
+#import multiprocessing
 from time import sleep
 
 
@@ -286,10 +286,9 @@ class MDP(object):
         util.warn('sim_multi is deprecated!')
         assert isinstance(cfg, SimConfig)
         Do, Da = self.obs_space.storage_size, self.action_space.storage_size
-
+        
         if num_threads is None:
-            num_threads = multiprocessing.cpu_count()
-
+            num_threads = 1
         # Completed trajectories
         num_sa = 0
         completed_translists = []
@@ -350,7 +349,8 @@ class MDP(object):
         Multiprocessed simulation
         Not thread safe! But why would you want this to be thread safe anyway?
         '''
-        num_processes = cfg.batch_size if cfg.batch_size is not None else multiprocessing.cpu_count()//2
+        #num_processes = cfg.batch_size if cfg.batch_size is not None else multiprocessing.cpu_count()//2
+        num_processes = 1
 
         # Bypass multiprocessing if only using one process
         if num_processes == 1:
